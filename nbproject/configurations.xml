@@ -40,7 +40,7 @@
       </toolsSet>
       <compileType>
         <ccTool>
-          <commandLine>-static-libgcc -static-libstdc++ -std=c++0x</commandLine>
+          <commandLine>-static-libgcc -static-libstdc++ -std=c++11 -Wall</commandLine>
         </ccTool>
       </compileType>
       <item path="main.cpp" ex="false" tool="1" flavor2="0">

@@ -41,7 +41,7 @@ int seq_pointer::operator !=(seq_pointer &dest){
 seq_pointer seq_pointer::operator ++ (){
     ++current;
     if(current==end && index!=(source->getSize()-1)){
-        index = ++index;
+        ++index;
         current=(*source).elements[index].begin();
         end=(*source).elements[index].end();
         wildcard=false;
@@ -64,7 +64,7 @@ void seq_pointer::jump(container::iterator dest){
 
 void seq_pointer::skip(){
     if (index < source->getSize()){
-        index = ++index;
+        ++index;
         current=(*source).elements[index].begin();
         end=(*source).elements[index].end();
         wildcard=false;

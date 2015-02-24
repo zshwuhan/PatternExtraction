@@ -9,19 +9,19 @@ CND_DISTDIR=dist
 # Debug configuration
 CND_PLATFORM_Debug=MinGW-Windows
 CND_ARTIFACT_DIR_Debug=dist/Debug/MinGW-Windows
-CND_ARTIFACT_NAME_Debug=hashsequence
-CND_ARTIFACT_PATH_Debug=dist/Debug/MinGW-Windows/hashsequence
+CND_ARTIFACT_NAME_Debug=patternextraction
+CND_ARTIFACT_PATH_Debug=dist/Debug/MinGW-Windows/patternextraction
 CND_PACKAGE_DIR_Debug=dist/Debug/MinGW-Windows/package
-CND_PACKAGE_NAME_Debug=hashsequence.tar
-CND_PACKAGE_PATH_Debug=dist/Debug/MinGW-Windows/package/hashsequence.tar
+CND_PACKAGE_NAME_Debug=patternextraction.tar
+CND_PACKAGE_PATH_Debug=dist/Debug/MinGW-Windows/package/patternextraction.tar
 # Release configuration
 CND_PLATFORM_Release=MinGW-Windows
 CND_ARTIFACT_DIR_Release=dist/Release/MinGW-Windows
-CND_ARTIFACT_NAME_Release=hashsequence
-CND_ARTIFACT_PATH_Release=dist/Release/MinGW-Windows/hashsequence
+CND_ARTIFACT_NAME_Release=patternextraction
+CND_ARTIFACT_PATH_Release=dist/Release/MinGW-Windows/patternextraction
 CND_PACKAGE_DIR_Release=dist/Release/MinGW-Windows/package
-CND_PACKAGE_NAME_Release=hashsequence.tar
-CND_PACKAGE_PATH_Release=dist/Release/MinGW-Windows/package/hashsequence.tar
+CND_PACKAGE_NAME_Release=patternextraction.tar
+CND_PACKAGE_PATH_Release=dist/Release/MinGW-Windows/package/patternextraction.tar
 #
 # include compiler specific variables
 #
