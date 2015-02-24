@@ -35,7 +35,9 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 
 # Object Files
 OBJECTFILES= \
+	${OBJECTDIR}/helperFunctions.o \
 	${OBJECTDIR}/main.o \
+	${OBJECTDIR}/prefixSpan.o \
 	${OBJECTDIR}/seq_pointer.o \
 	${OBJECTDIR}/sequence_hash.o
 
@@ -64,10 +66,20 @@ ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/patternextraction.exe: ${OBJECTFILES}
 	${MKDIR} -p ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}
 	${LINK.cc} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/patternextraction ${OBJECTFILES} ${LDLIBSOPTIONS}
 
+${OBJECTDIR}/helperFunctions.o: helperFunctions.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/helperFunctions.o helperFunctions.cpp
+
 ${OBJECTDIR}/main.o: main.cpp 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
 	$(COMPILE.cc) -g -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/main.o main.cpp
+
+${OBJECTDIR}/prefixSpan.o: prefixSpan.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/prefixSpan.o prefixSpan.cpp
 
 ${OBJECTDIR}/seq_pointer.o: seq_pointer.cpp 
 	${MKDIR} -p ${OBJECTDIR}

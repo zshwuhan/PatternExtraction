@@ -4,6 +4,8 @@
     <logicalFolder name="HeaderFiles"
                    displayName="Header Files"
                    projectFiles="true">
+      <itemPath>helperFunctions.hpp</itemPath>
+      <itemPath>prefixSpan.hpp</itemPath>
       <itemPath>seq_pointer.hpp</itemPath>
       <itemPath>sequence_hash.hpp</itemPath>
     </logicalFolder>
@@ -14,7 +16,9 @@
     <logicalFolder name="SourceFiles"
                    displayName="Source Files"
                    projectFiles="true">
+      <itemPath>helperFunctions.cpp</itemPath>
       <itemPath>main.cpp</itemPath>
+      <itemPath>prefixSpan.cpp</itemPath>
       <itemPath>seq_pointer.cpp</itemPath>
       <itemPath>sequence_hash.cpp</itemPath>
     </logicalFolder>
@@ -43,7 +47,15 @@
           <commandLine>-static-libgcc -static-libstdc++ -std=c++11 -Wall</commandLine>
         </ccTool>
       </compileType>
+      <item path="helperFunctions.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="helperFunctions.hpp" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="main.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="prefixSpan.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="prefixSpan.hpp" ex="false" tool="3" flavor2="0">
       </item>
       <item path="seq_pointer.cpp" ex="false" tool="1" flavor2="0">
       </item>
@@ -74,7 +86,15 @@
           <developmentMode>5</developmentMode>
         </asmTool>
       </compileType>
+      <item path="helperFunctions.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="helperFunctions.hpp" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="main.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="prefixSpan.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="prefixSpan.hpp" ex="false" tool="3" flavor2="0">
       </item>
       <item path="seq_pointer.cpp" ex="false" tool="1" flavor2="0">
       </item>
