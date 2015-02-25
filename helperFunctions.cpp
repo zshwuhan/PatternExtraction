@@ -19,33 +19,40 @@ sequence_hash sequencer(string input){
     stringstream inputStreamed(input);
     while(inputStreamed){
         if(inputStreamed.peek()=='('){
-            inputStreamed>>low;
+            inputStreamed.ignore();
             inputStreamed>>high;
+            inputStreamed.ignore();
+            inputStreamed>>low;
             net = low | (high<<16);
-            output.append(net);
+            output = output.append(net);
             assembleMode=true;
         }else if(inputStreamed.peek()==')'){
             assembleMode=false;
             inputStreamed.ignore();
-        }else{
+        }else if(inputStreamed.peek()==','){
+            inputStreamed.ignore();
+        }else if(inputStreamed.peek()!=-1){
             if(assembleMode){
-                inputStreamed>>low;
                 inputStreamed>>high;
+                inputStreamed.ignore();
+                inputStreamed>>low;
                 net = low | (high<<16);
-                output.assemble(net);
+                output = output.assemble(net);
             }else{
-                inputStreamed>>low;
                 inputStreamed>>high;
+                inputStreamed.ignore();
+                inputStreamed>>low;
                 net = low | (high<<16);
-                output.append(net);
+                output = output.append(net);
             }
+        }else{
+            inputStreamed.ignore();
         }
-        
     }
     return output;
 }
 
-vector <sequence_hash> massSequencer(istream input){
+vector <sequence_hash> massSequencer(iostream input){
     vector <sequence_hash> output;
     while(input){
         string temp;

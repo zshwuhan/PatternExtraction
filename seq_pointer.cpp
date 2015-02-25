@@ -15,12 +15,14 @@ seq_pointer::seq_pointer():source(NULL){
 
 seq_pointer::seq_pointer(sequence_hash * seq, container::iterator iter, container::iterator ender, int ind):source(seq){
     wildcard = false;
+    lastMatch = false;
     current = iter;
     end = ender;
     index = ind;
 }
 
 seq_pointer::seq_pointer(const seq_pointer& orig):source(orig.source){
+    lastMatch = orig.lastMatch;
     wildcard = orig.wildcard;
     current = orig.current;
     end = orig.end;
@@ -53,7 +55,7 @@ dataType seq_pointer::operator *(){
 }
 
 void seq_pointer::__dump__(){
-    cout<<"{Index: "<<index<<" Current: "<<*current<<" Wildcard: "<< wildcard <<"}\n";
+    cout<<"{Index: "<<index<<" Current: "<<*current<<" Wildcard: "<< wildcard <<" LastMatch: " << matched() << "}\n";
     return;
 }
 
@@ -63,7 +65,7 @@ void seq_pointer::jump(container::iterator dest){
 }
 
 void seq_pointer::skip(){
-    if (index < source->getSize()){
+    if (index < source->getSize()-1){
         ++index;
         current=(*source).elements[index].begin();
         end=(*source).elements[index].end();
@@ -92,6 +94,7 @@ seq_pointer seq_pointer::proyect(dataType appending){
             result.jump(ritorno);
             result.wildcard = true;
             ++result;
+            if (result.null()) result.lastMatch=true;
             break;
         }
         result.skip();
@@ -109,12 +112,15 @@ int match(seq_pointer &advanceable, seq_pointer &iterable){
         if (match==goal){ 
             advanceable.jump(start);
             ++advanceable;
+            if (advanceable.null()) advanceable.lastMatch = true;
             return 1;
             }
         ++start;
     }{advanceable.skip();return 0;}
 }
 
+
+//FIX LAST PLACE ASSEMBLY!!!!!!!!!!!!!!
 seq_pointer seq_pointer::proyect(dataType appending, sequence_hash &prefix){
     seq_pointer result = (*this);
     seq_pointer trueEnd = source->end();
@@ -126,16 +132,17 @@ seq_pointer seq_pointer::proyect(dataType appending, sequence_hash &prefix){
             result.jump(ritorno);
             result.wildcard = true;
             ++result;
+            if (result.null()) result.lastMatch=true;
         }
         result.skip();
     }else{//not so simple case if we haven't
     //Substring match is what's left
-        sequence_hash nPrefix = prefix.append(appending);
-        seq_pointer prefIter = prefix.tail_pointer();
-        seq_pointer prefEnd = prefix.tail_pointer();
+        sequence_hash nPrefix = prefix.assemble(appending);
+        seq_pointer prefIter = nPrefix.tail_pointer();
+        seq_pointer prefEnd = nPrefix.tail_pointer();
         prefEnd.skip();
-        while(result != trueEnd && prefIter != prefEnd){
-            match(result, prefIter);
+        while(!result.null() && prefIter != prefEnd){
+            if (match(result, prefIter)) break;
         }
     }return result;
 }

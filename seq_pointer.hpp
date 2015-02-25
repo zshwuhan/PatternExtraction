@@ -34,11 +34,13 @@ public:
     void reset();
     bool getWildcard(){return wildcard;}
     bool null(){return current==end;}
+    bool matched(){return lastMatch;}
     seq_pointer proyect(dataType);
     seq_pointer proyect(dataType, sequence_hash &);
     virtual ~seq_pointer();
     void __dump__();
 private:
+    bool lastMatch;
     bool wildcard;
     container::iterator current;
     container::iterator end;

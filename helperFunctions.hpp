@@ -13,7 +13,7 @@
 #include <iostream>
 
 sequence_hash sequencer(string);
-vector <sequence_hash> massSequencer(istream);
+vector <sequence_hash> massSequencer(iostream);
 
 
 #endif	/* HELPERFUNCTIONS_HPP */

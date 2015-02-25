@@ -16,6 +16,7 @@
 #include <vector>
 #include <set>
 #include <algorithm>
+#include "sstream"
 #define dataType int
 #define container set<dataType>
 #define bit16 65535
@@ -25,34 +26,22 @@ using namespace std;
  * 
  */
 int main(int argc, char** argv) {
-    sequence_hash test;
-    cout<<"Test Created"<<'\n';
-    test = test.assemble(3);
-    cout<<"Test Append 1"<<'\n';
-    test = test.assemble(15);
-    cout<<"Test Assemble 1"<<'\n';
-    test = test.append(14);
-    cout<<"Test Append 2"<<'\n';
-    test = test.assemble(9);
-    cout<<"Test Assemble 2"<<'\n';
-    cout<<test.getSize()<<'\n';
-    cout<<test<<'\n';
-    seq_pointer p1 = test.begin();
-    cout<<*p1<<'\n';
-    ++p1;
-    cout<<*p1<<'\n';
-    ++p1;
-    cout<<*p1<<'\n';
-    p1.__dump__();
-    ++p1; ++p1;
-    seq_pointer p2 = (test.end());
-    cout<<"p1 == p2: "<<(p1==p2)<<'\n';
-    cout<<"p1 != p2: "<<(p1!=p2)<<'\n';
-    seq_pointer p3 = test.begin();
-    (p3.proyect(14)).__dump__();
-    cout<<(p3.proyect(14)).null();
-    seq_pointer p4 = p3;
-    cout<<(p4.proyect(14)).null();
+    string s1 = "(1:1,2:1,3:1),1:1,2:4,(1:2,2:3)";
+    string s2 = "(1:1,2:2),1:1,2:4,(1:2,2:3)";
+    string s3 = "1:2";
+    vector <sequence_hash> seqDatabase;
+    sequence_hash p1 = sequencer(s1);
+    sequence_hash p2 = sequencer(s2);
+    sequence_hash p3 = sequencer(s3);
+    cout<<(p1.begin().proyect(131075)).matched()<<'\n';
+    cout<<(p1.begin().proyect(65537).proyect(131075)).matched()<<'\n';
+    
+    seqDatabase.push_back(p1);
+    seqDatabase.push_back(p2);
+    cout<< seqDatabase[0] <<'\n';
+    cout<< seqDatabase[1] <<'\n';
+    cout<<"Prefix Span Test:\n";
+    prefixSpan(2, seqDatabase);
     return 0;
 }
 

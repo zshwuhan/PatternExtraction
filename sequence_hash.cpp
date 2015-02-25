@@ -110,7 +110,7 @@ seq_pointer sequence_hash::end(){
 }
 
 seq_pointer sequence_hash::tail_pointer(){
-    seq_pointer p1 (const_cast<sequence_hash *> (this), tail().begin(), tail().end(), this->getSize()); 
+    seq_pointer p1 (const_cast<sequence_hash *> (this), tail().begin(), tail().end(), this->getSize()-1); 
     return p1;
 }
 
