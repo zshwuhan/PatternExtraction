@@ -18,10 +18,12 @@
 
 using namespace std;
 
+
+
 ostream &operator << (ostream &osin, container hashmap){
     if (hashmap.size()==0) return osin;
     if (hashmap.size()==1){
-        osin<<(*(hashmap.begin()));}
+        osin<<((*(hashmap.begin()))>>16)<<':'<<(((*(hashmap.begin()))<<16)>>16);}
     else {
         osin<<'(';
         container::iterator beg, forward, endoru;
@@ -31,12 +33,12 @@ ostream &operator << (ostream &osin, container hashmap){
         if (beg!=endoru){
             ++forward;
             while(forward!=endoru){
-                osin<<(*beg);
+                osin<<((*beg)>>16)<<':'<<(((*beg)<<16)>>16);
                 osin<<", ";
                 ++forward;
                 ++beg;
             }
-        }osin<<(*beg);    
+        }osin<<((*beg)>>16)<<':'<<(((*beg)<<16)>>16);  
         
         osin<<')';
     }

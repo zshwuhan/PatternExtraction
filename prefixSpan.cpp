@@ -53,7 +53,7 @@ container appendProyection( container candidates,       vector <seq_pointer> &da
             ++dataStart;
         }if(complement<=limit){
             sequence_hash printable = prefix.append(*candStart);
-            cout<<printable<<" -> Support -> "<<database.size()-complement<<'\n';
+            cout<<"Support : "<<database.size()-complement<< " Sequence: " <<printable<<'\n';
             exit.emplace(*candStart, projectionResult);
             //Save projection result alongside the element it was meant for
             output.insert(*candStart);

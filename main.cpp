@@ -26,8 +26,8 @@ using namespace std;
  * 
  */
 int main(int argc, char** argv) {
-    string s1 = "(1:1,2:1,3:1),1:1,2:4,(1:2,2:3)";
-    string s2 = "(1:1,2:2),1:1,2:4,(1:2,2:3)";
+    string s1 = "(1:1,2:1,3:1),1:1,2:4,(1:2,2:3),1:1,(1:3,2:4)";
+    string s2 = "(1:1,2:2),1:1,2:4,(1:2,2:3),1:1,(1:5,2:4)";
     string s3 = "1:2";
     vector <sequence_hash> seqDatabase;
     sequence_hash p1 = sequencer(s1);
