@@ -16,7 +16,8 @@
 #include <vector>
 #include <set>
 #include <algorithm>
-#include "sstream"
+#include <string>
+#include <sstream>
 #include <fstream>
 #define dataType int
 #define container set<dataType>
@@ -54,6 +55,8 @@ int main(int argc, char** argv) {
         vector <sequence_hash> seqDatabase;
         seqDatabase = massSequencer(file);
         int threshold = atoi(argv[2]);
+        string check = argv[2];
+        if (check.find('%') != (unsigned int)(-1)) threshold = (int)((((float)threshold)/100.00)*seqDatabase.size());
         prefixSpan(threshold, seqDatabase);        
     }
     return 0;
