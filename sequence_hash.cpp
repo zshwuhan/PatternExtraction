@@ -34,7 +34,7 @@ ostream &operator << (ostream &osin, container hashmap){
             ++forward;
             while(forward!=endoru){
                 osin<<((*beg)>>16)<<':'<<(((*beg)<<16)>>16);
-                osin<<", ";
+                osin<<",";
                 ++forward;
                 ++beg;
             }
