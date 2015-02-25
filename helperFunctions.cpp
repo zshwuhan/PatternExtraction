@@ -51,15 +51,16 @@ sequence_hash sequencer(string input){
     }
     return output;
 }
+#include <fstream>
 
-vector <sequence_hash> massSequencer(iostream input){
+vector <sequence_hash> massSequencer(ifstream &input){
     vector <sequence_hash> output;
     while(input){
         string temp;
         getline(input, temp);
         sequence_hash helper;
         helper = sequencer(temp);
-        output.push_back(helper);
+        if (!helper.empty())output.push_back(helper);
     }
     return output;
 }
