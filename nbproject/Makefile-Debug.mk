@@ -39,7 +39,7 @@ OBJECTFILES= \
 	${OBJECTDIR}/main.o \
 	${OBJECTDIR}/prefixSpan.o \
 	${OBJECTDIR}/seq_pointer.o \
-	${OBJECTDIR}/sequence_hash.o
+	${OBJECTDIR}/sequence.o
 
 
 # C Compiler Flags
@@ -86,10 +86,10 @@ ${OBJECTDIR}/seq_pointer.o: seq_pointer.cpp
 	${RM} "$@.d"
 	$(COMPILE.cc) -g -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/seq_pointer.o seq_pointer.cpp
 
-${OBJECTDIR}/sequence_hash.o: sequence_hash.cpp 
+${OBJECTDIR}/sequence.o: sequence.cpp 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/sequence_hash.o sequence_hash.cpp
+	$(COMPILE.cc) -g -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/sequence.o sequence.cpp
 
 # Subprojects
 .build-subprojects:

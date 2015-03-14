@@ -7,7 +7,7 @@
       <itemPath>helperFunctions.hpp</itemPath>
       <itemPath>prefixSpan.hpp</itemPath>
       <itemPath>seq_pointer.hpp</itemPath>
-      <itemPath>sequence_hash.hpp</itemPath>
+      <itemPath>sequence.hpp</itemPath>
     </logicalFolder>
     <logicalFolder name="ResourceFiles"
                    displayName="Resource Files"
@@ -20,7 +20,7 @@
       <itemPath>main.cpp</itemPath>
       <itemPath>prefixSpan.cpp</itemPath>
       <itemPath>seq_pointer.cpp</itemPath>
-      <itemPath>sequence_hash.cpp</itemPath>
+      <itemPath>sequence.cpp</itemPath>
     </logicalFolder>
     <logicalFolder name="TestFiles"
                    displayName="Test Files"
@@ -61,9 +61,9 @@
       </item>
       <item path="seq_pointer.hpp" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="sequence_hash.cpp" ex="false" tool="1" flavor2="0">
+      <item path="sequence.cpp" ex="false" tool="1" flavor2="0">
       </item>
-      <item path="sequence_hash.hpp" ex="false" tool="3" flavor2="0">
+      <item path="sequence.hpp" ex="false" tool="3" flavor2="0">
       </item>
     </conf>
     <conf name="Release" type="1">
@@ -100,9 +100,9 @@
       </item>
       <item path="seq_pointer.hpp" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="sequence_hash.cpp" ex="false" tool="1" flavor2="0">
+      <item path="sequence.cpp" ex="false" tool="1" flavor2="0">
       </item>
-      <item path="sequence_hash.hpp" ex="false" tool="3" flavor2="0">
+      <item path="sequence.hpp" ex="false" tool="3" flavor2="0">
       </item>
     </conf>
   </confs>

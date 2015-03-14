@@ -1,15 +1,8 @@
-/* 
- * File:   main.cpp
- * Author: Agustin
- *
- * Created on 11 February 2015, 23:58
- */
-
 #include <cstdlib>
+#include "prefixSpan_hash.hpp"
 #include "sequence_hash.hpp"
-#include "seq_pointer.hpp"
-#include "prefixSpan.hpp"
-#include "helperFunctions.hpp"
+#include "seq_pointer_hash.hpp"
+#include "helperFunctions_hash.hpp"
 #include <iostream>
 #include <map>
 #include <unordered_map>
@@ -20,32 +13,35 @@
 #include <sstream>
 #include <fstream>
 #define dataType int
-#define container set<dataType>
+#define classType int
+#define container unordered_map<classType, dataType>
 #define bit16 65535
 
 using namespace std;
-/*
- * 
- */
-
 
 int main(int argc, char** argv) {
     if (argc < 2){
         cout<<"DEMO: \n";
-        string s1 = "(1:1,2:1,3:1),1:1,2:4,(1:2,2:3),1:1,(1:3,2:4)";
-        string s2 = "(1:1,2:2),1:1,2:4,(1:2,2:3),1:1,(1:5,2:4)";
-        string s3 = "1:2";
+        string s1 = "1:1,(1:1,2:2,3:3),(1:1,3:3),4:4,(3:3,6:6)";
+        string s2 = "(1:1,4:4),3:3,(2:2,3:3),(1:1,5:5)";
+        string s3 = "(5:5,6:6),(1:1,2:2),(4:4,6:6),3:3,2:2";
+        string s4 = "5:5,7:7,(1:1,6:6),3:3,2:2,3:3";
+        string hell = "(1:1,2:2,3:3,4:4,5:5)";
         vector <sequence_hash> seqDatabase;
         sequence_hash p1 = sequencer(s1);
         sequence_hash p2 = sequencer(s2);
         sequence_hash p3 = sequencer(s3);
-        cout<<(p1.begin().proyect(131075)).matched()<<'\n';
-        cout<<(p1.begin().proyect(65537).proyect(131075)).matched()<<'\n';
-
+        sequence_hash p4 = sequencer(s4);
+        sequence_hash TEST = sequencer(hell);
+        cout<<p1<<'\n'<<p2<<'\n'<<p3<<'\n'<<p4<<'\n'<<TEST<<'\n';
+        cout<<p1.begin().proyect(6,6,TEST).null()<<'\n';
+        cout<<p2.begin().proyect(6,6,TEST).null()<<'\n';
+        cout<<p3.begin().proyect(6,6,TEST).null()<<'\n';
+        cout<<p4.begin().proyect(6,6,TEST).null()<<'\n';
         seqDatabase.push_back(p1);
         seqDatabase.push_back(p2);
-        cout<< seqDatabase[0] <<'\n';
-        cout<< seqDatabase[1] <<'\n';
+        seqDatabase.push_back(p3);
+        seqDatabase.push_back(p4);
         cout<<"Prefix Span Test:\n";
         prefixSpan(2, seqDatabase);
     }else{
@@ -60,5 +56,5 @@ int main(int argc, char** argv) {
         prefixSpan(threshold, seqDatabase);        
     }
     return 0;
+    
 }
-

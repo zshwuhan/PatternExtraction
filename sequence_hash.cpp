@@ -10,11 +10,14 @@
 #include <bitset>
 #include <vector>
 #include <set>
+#include <unordered_map>
 #include <iostream>
 #include <algorithm>
-#include "seq_pointer.hpp"
+#include "seq_pointer_hash.hpp"
 #define dataType int
-#define container set<dataType>
+#define classType int
+#define pairSet set<pair<classType,dataType>>
+#define container unordered_map<classType, dataType>
 
 using namespace std;
 
@@ -23,7 +26,7 @@ using namespace std;
 ostream &operator << (ostream &osin, container hashmap){
     if (hashmap.size()==0) return osin;
     if (hashmap.size()==1){
-        osin<<((*(hashmap.begin()))>>16)<<':'<<(((*(hashmap.begin()))<<16)>>16);}
+        osin<<((hashmap.begin())->first)<<':'<<(hashmap.begin()->second);}
     else {
         osin<<'(';
         container::iterator beg, forward, endoru;
@@ -33,12 +36,12 @@ ostream &operator << (ostream &osin, container hashmap){
         if (beg!=endoru){
             ++forward;
             while(forward!=endoru){
-                osin<<((*beg)>>16)<<':'<<(((*beg)<<16)>>16);
+                osin<<((*beg).first)<<':'<<(((*beg).second));
                 osin<<",";
                 ++forward;
                 ++beg;
             }
-        }osin<<((*beg)>>16)<<':'<<(((*beg)<<16)>>16);  
+        }osin<<((*beg).first)<<':'<<(((*beg).second));  
         
         osin<<')';
     }
@@ -63,38 +66,53 @@ sequence_hash::sequence_hash(){
     vector <container> copy;
     this->elements = copy;
     this->size=0;
+    this->tailMax = 0;
 }
 
 sequence_hash::sequence_hash(vector <container> input) {
     vector <container> copy = input;
     this->elements = copy;
     this->size = copy.size();
-}
+    //C++ function for Hashmap Max Value on tail;
+        vector <classType> keys;
+    if (!input.empty()){    
+        for(unordered_map<classType,dataType>::iterator it = elements.rbegin()->begin(); it != elements.rbegin()->end(); ++it) {
+            keys.push_back(it->first);}
+                vector <classType>::iterator iter;
+        iter = max_element(keys.begin(), keys.end());
+                if (keys.begin() != keys.end())
+            tailMax = *iter;
+        else tailMax = 0;
+    }else tailMax=0;
+    }
 
 sequence_hash::sequence_hash(const sequence_hash& orig) {
     this->elements = orig.elements;
     this->size = orig.size;
+    this->tailMax = orig.tailMax;
 }
 
 sequence_hash::~sequence_hash() {
 }
 
-//sequence_hash sequence_hash::proyection(int item);
-//sequence_hash sequence_hash::proyection(int item, sequence_hash prefix);
+//sequence sequence::proyection(int item);
+//sequence sequence::proyection(int item, sequence prefix);
 
-sequence_hash sequence_hash::append(int item){
+sequence_hash sequence_hash::append(classType var, dataType item){
     container element; 
-    element.insert(item);
-    sequence_hash ritorno (this->elements);
-    (ritorno.elements).push_back(element);
+    element.emplace(var, item);
+        sequence_hash ritorno (this->elements);
+        (ritorno.elements).push_back(element);
     ritorno.size = ritorno.size + 1;
+    ritorno.tailMax = var;
     return ritorno;
 }
-sequence_hash sequence_hash::assemble(int item){
+sequence_hash sequence_hash::assemble(classType var, dataType item){
     sequence_hash ritorno (this->elements);
     if (((ritorno.elements).rbegin())==((ritorno.elements).rend())){
-        return (ritorno.append(item));}
-    (*((ritorno.elements).rbegin())).insert(item);
+        return (ritorno.append(var, item));}
+    (*((ritorno.elements).rbegin())).emplace(var, item);
+    ritorno.tailMax = (ritorno.tailMax>var)?ritorno.tailMax:var;
     return ritorno;
 }
 
@@ -103,19 +121,23 @@ container sequence_hash::tail(){
     return ritorno;
 };
 
-seq_pointer sequence_hash::begin(){
-    return seq_pointer(const_cast<sequence_hash *> (this), elements.begin()->begin(), elements.begin()->end());
+seq_pointer_hash sequence_hash::begin(){
+    return seq_pointer_hash(const_cast<sequence_hash *> (this), elements.begin(), elements.end());
 }
 
-seq_pointer sequence_hash::end(){
-    return seq_pointer(const_cast<sequence_hash *> (this), elements.rbegin()->end(), elements.rbegin()->end(), (this->getSize()) -1);
-}
-
-seq_pointer sequence_hash::tail_pointer(){
-    seq_pointer p1 (const_cast<sequence_hash *> (this), tail().begin(), tail().end(), this->getSize()-1); 
-    return p1;
+seq_pointer_hash sequence_hash::end(){
+    return seq_pointer_hash(const_cast<sequence_hash *> (this), elements.end(), elements.end());
 }
 
 int sequence_hash::empty(){
     return (size==0);
+}
+
+pairSet sequence_hash::itemList(){
+    pairSet listing;
+    vector<container>::iterator vStart, vEnd; vStart=elements.begin(); vEnd=elements.end();
+    while(vStart!=vEnd){
+        listing.insert(vStart->begin(), vStart->end());
+        ++vStart;
+    }return listing;
 }

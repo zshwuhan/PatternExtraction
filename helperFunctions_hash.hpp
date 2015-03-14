@@ -5,8 +5,8 @@
  * Created on 24 February 2015, 13:55
  */
 
-#ifndef HELPERFUNCTIONS_HPP
-#define	HELPERFUNCTIONS_HPP
+#ifndef HELPERFUNCTIONS_HASH_HPP
+#define	HELPERFUNCTIONS_HASH_HPP
 #include <string>
 #include "sequence_hash.hpp"
 #include <vector>

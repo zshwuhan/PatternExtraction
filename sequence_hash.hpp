@@ -11,35 +11,42 @@
 #include <map>
 #include <bitset>
 #include <vector>
+#include <unordered_map>
+#include "seq_pointer_hash.hpp"
 #include <set>
-#include "seq_pointer.hpp"
 using namespace std;
 #define dataType int
-#define container set<dataType>
-class seq_pointer;
+#define classType int
+#define pairSet set<pair<classType,dataType>>
+#define container unordered_map<classType, dataType>
+class seq_pointer_hash;
 
 class sequence_hash {
     friend ostream &operator << (ostream &, sequence_hash &);
-    friend class seq_pointer;
+    friend class seq_pointer_hash;
 public:
     sequence_hash();
     sequence_hash(vector <container>);
     sequence_hash(const sequence_hash& orig);
     virtual ~sequence_hash();
-//    sequence_hash proyection(int item);
-//    sequence_hash proyection(int item, sequence_hash prefix);
-    sequence_hash append(int item);
-    sequence_hash assemble(int item);
+//    sequence proyection(int item);
+//    sequence proyection(int item, sequence prefix);
+    sequence_hash append(classType var, dataType item);
+    sequence_hash append(pair<classType, dataType> pare){return this->append(pare.first, pare.second);}
+    sequence_hash assemble(classType var, dataType item);
+    sequence_hash assemble(pair<classType, dataType> pare){return this->assemble(pare.first, pare.second);}
     container tail();
-    seq_pointer tail_pointer();
     int in(int);
     int getSize(){return size;}
     int empty();
-    seq_pointer begin();
-    seq_pointer end();
+    pairSet itemList();
+    int getTailMax(){return tailMax;}
+    seq_pointer_hash begin();
+    seq_pointer_hash end();
 private:
     vector <container> elements;
     int size;
+    int tailMax;
 };
 
 #endif	/* SEQUENCE_HASH_HPP */

@@ -5,17 +5,26 @@
  * Created on 24 February 2015, 13:55
  */
 
-#include "helperFunctions.hpp"
+#include "helperFunctions_hash.hpp"
 #include <string>
 #include "sequence_hash.hpp"
 #include <vector>
 #include <iostream>
 #include <sstream>
 
+void vectorPrint(vector <sequence_hash> v){
+    vector <sequence_hash>::iterator it1,it2;
+    it1=v.begin(), it2=v.end();
+    while(it1!=it2){
+        cerr<<*it1;
+        ++it1;
+    }
+}
+
 sequence_hash sequencer(string input){
     sequence_hash output;
     bool assembleMode = false;
-    int low, high, net;
+    int low, high;
     stringstream inputStreamed(input);
     while(inputStreamed){
         if(inputStreamed.peek()=='('){
@@ -23,9 +32,8 @@ sequence_hash sequencer(string input){
             inputStreamed>>high;
             inputStreamed.ignore();
             inputStreamed>>low;
-            net = low | (high<<16);
-            output = output.append(net);
-            assembleMode=true;
+                        output = output.append(high, low);
+                        assembleMode=true;
         }else if(inputStreamed.peek()==')'){
             assembleMode=false;
             inputStreamed.ignore();
@@ -36,15 +44,13 @@ sequence_hash sequencer(string input){
                 inputStreamed>>high;
                 inputStreamed.ignore();
                 inputStreamed>>low;
-                net = low | (high<<16);
-                output = output.assemble(net);
-            }else{
+                                output = output.assemble(high,low);
+                            }else{
                 inputStreamed>>high;
                 inputStreamed.ignore();
                 inputStreamed>>low;
-                net = low | (high<<16);
-                output = output.append(net);
-            }
+                                output = output.append(high, low);
+                            }
         }else{
             inputStreamed.ignore();
         }
