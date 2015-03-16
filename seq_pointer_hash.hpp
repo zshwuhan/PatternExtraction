@@ -14,10 +14,14 @@
 #include <unordered_map>
 #include "sequence_hash.hpp"
 using namespace std;
-#define dataType int
-#define classType int
-#define container unordered_map<classType, dataType>
-
+#ifndef dataType
+    #define dataType int
+    #define classType int
+    #define hashConv int
+    #define pairSet set<pair<classType, dataType>>
+    #define container unordered_map<classType, dataType>
+    #define bit16 65535
+#endif
 class sequence_hash;
 
 class seq_pointer_hash {

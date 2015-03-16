@@ -9,9 +9,14 @@
 #include "seq_pointer_hash.hpp"
 #include <algorithm>
 #include <unordered_map>
-#define dataType int
-#define classType int
-#define container unordered_map<classType, dataType>
+#ifndef dataType
+    #define dataType int
+    #define classType int
+    #define hashConv int
+    #define pairSet set<pair<classType, dataType>>
+    #define container unordered_map<classType, dataType>
+    #define bit16 65535
+#endif
 
 seq_pointer_hash::seq_pointer_hash():source(NULL){
 }

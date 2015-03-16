@@ -14,10 +14,14 @@
 #include <iostream>
 #include <algorithm>
 #include "seq_pointer_hash.hpp"
-#define dataType int
-#define classType int
-#define pairSet set<pair<classType,dataType>>
-#define container unordered_map<classType, dataType>
+#ifndef dataType
+    #define dataType int
+    #define classType int
+    #define hashConv int
+    #define pairSet set<pair<classType, dataType>>
+    #define container unordered_map<classType, dataType>
+    #define bit16 65535
+#endif
 
 using namespace std;
 
