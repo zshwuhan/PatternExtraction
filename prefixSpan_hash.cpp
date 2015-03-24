@@ -1,7 +1,16 @@
+/* 
+ * File:   sequence_hash.hpp
+ * Author: Agustin Guevara Cogorno
+ * Supervisor: Hugo Alatrista Salas
+ * Employer: Pontificia Universidad Católica del Perú (PUCP) - Artificial Intelligence and Pattern Recognition Research Group (GRPIIA)
+ *
+ */
+
 #include <cstdlib>
 #include "seq_pointer_hash.hpp"
 #include "sequence_hash.hpp"
 #include "prefixSpan_hash.hpp"
+#include "helperFunctions_hash.hpp"
 #include <iostream>
 #include <map>
 #include <unordered_map>
@@ -19,16 +28,6 @@
 
 using namespace std;
 
-
-hashConv convert(pair<classType, dataType> datum){
-    return ((datum.first<<16)|datum.second);
-}
-
-pair<classType, dataType> deconvert(hashConv data){
-    return make_pair((data>>16), (data<<16)>>16);
-}
-
-//REVIEW ALL INSTANCE OF CONTAINER!!
 
 pairSet appendProyection( pairSet candidates,       vector <seq_pointer_hash> &database, //
                             int threshold,              sequence_hash &prefix,          //
@@ -96,7 +95,6 @@ void assembleProyection(pairSet::iterator &candStart,  pairSet::iterator candEnd
     return;       
 } 
 
-//MUST REVISE UNIQUE ELEMENTS WON'T WORK NOW!!
 void retrieve(pairSet &items, sequence_hash seq){
     pairSet itemSet = seq.itemList();
     items.insert(itemSet.begin(), itemSet.end());

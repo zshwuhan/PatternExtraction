@@ -1,8 +1,9 @@
 /* 
- * File:   prefixSpan.hpp
- * Author: Agustin
+ * File:   sequence_hash.hpp
+ * Author: Agustin Guevara Cogorno
+ * Supervisor: Hugo Alatrista Salas
+ * Employer: Pontificia Universidad Católica del Perú (PUCP) - Artificial Intelligence and Pattern Recognition Research Group (GRPIIA)
  *
- * Created on 24 February 2015, 13:36
  */
 
 #ifndef PREFIXSPAN_HASH_HPP

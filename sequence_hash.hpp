@@ -1,6 +1,8 @@
 /* 
  * File:   sequence_hash.hpp
- * Author: Agustin
+ * Author: Agustin Guevara Cogorno
+ * Supervisor: Hugo Alatrista Salas
+ * Employer: Pontificia Universidad Católica del Perú (PUCP) - Artificial Intelligence and Pattern Recognition Research Group (GRPIIA)
  *
  * Created on 12 February 2015, 00:00
  */
@@ -14,7 +16,7 @@
 #include <unordered_map>
 #include "seq_pointer_hash.hpp"
 #include <set>
-using namespace std;
+
 #ifndef dataType
     #define dataType int
     #define classType int
@@ -23,6 +25,9 @@ using namespace std;
     #define container unordered_map<classType, dataType>
     #define bit16 65535
 #endif
+
+using namespace std;
+
 class seq_pointer_hash;
 
 class sequence_hash {
@@ -35,23 +40,42 @@ public:
     virtual ~sequence_hash();
 //    sequence proyection(int item);
 //    sequence proyection(int item, sequence prefix);
-    sequence_hash append(classType var, dataType item);
-    sequence_hash append(pair<classType, dataType> pare){return this->append(pare.first, pare.second);}
-    sequence_hash assemble(classType var, dataType item);
-    sequence_hash assemble(pair<classType, dataType> pare){return this->assemble(pare.first, pare.second);}
+    virtual sequence_hash append(classType var, dataType item);
+    virtual sequence_hash append(pair<classType, dataType> pare){return this->append(pare.first, pare.second);}
+    virtual sequence_hash assemble(classType var, dataType item);
+    virtual sequence_hash assemble(pair<classType, dataType> pare){return this->assemble(pare.first, pare.second);}
     container tail();
     int in(int);
     int getSize(){return size;}
     int empty();
-    pairSet itemList();
+    virtual pairSet itemList();
     int getTailMax(){return tailMax;}
+	virtual bool valid(){return true;}
     seq_pointer_hash begin();
     seq_pointer_hash end();
-private:
+protected:
     vector <container> elements;
     int size;
     int tailMax;
 };
+#include "parserTree.hpp"
 
+class sequence_hash_parser: public sequence_hash{
+public:
+	sequence_hash_parser(parserTree parser){evaluator = parser;}
+	//MISSING IMPLEMENTATION
+    sequence_hash_parser(const sequence_hash_parser& orig);
+	//MISSING IMPLEMENTATION
+    sequence_hash append(classType var, dataType item);
+    sequence_hash append(pair<classType, dataType> pare){return this->append(pare.first, pare.second);}
+    sequence_hash assemble(classType var, dataType item);
+    sequence_hash assemble(pair<classType, dataType> pare){return this->assemble(pare.first, pare.second);}
+	bool valid(){return validity;}
+protected:
+	bool validity;
+	//Pointer to Tree should warrant consideration (after finishing cleanup)
+	parserTree evaluator;
+	unordered_map <hashConv, bool> tokenSet;
+};
 #endif	/* SEQUENCE_HASH_HPP */
 

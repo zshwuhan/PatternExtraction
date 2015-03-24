@@ -45,7 +45,7 @@ int seq_pointer_hash::operator !=(seq_pointer_hash &dest){
 }
 
 void seq_pointer_hash::__dump__(){
-    cout<<"{Elements: "<<" Wildcard: "<< wildcard << "}\n";
+    cout<<"{Wildcard: "<< wildcard << "}\n";
     return;
 }
 

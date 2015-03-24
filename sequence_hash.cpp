@@ -1,11 +1,14 @@
 /* 
- * File:   sequence_hash.cpp
- * Author: Agustin
- * 
- * Created on 12 February 2015, 00:00
+ * File:   sequence_hash.hpp
+ * Author: Agustin Guevara Cogorno
+ * Supervisor: Hugo Alatrista Salas
+ * Employer: Pontificia Universidad Católica del Perú (PUCP) - Artificial Intelligence and Pattern Recognition Research Group (GRPIIA)
+ *
  */
 
 #include "sequence_hash.hpp"
+#include "seq_pointer_hash.hpp"
+#include "helperFunctions_hash.hpp"
 #include <string>
 #include <bitset>
 #include <vector>
@@ -13,7 +16,6 @@
 #include <unordered_map>
 #include <iostream>
 #include <algorithm>
-#include "seq_pointer_hash.hpp"
 #ifndef dataType
     #define dataType int
     #define classType int
@@ -77,7 +79,6 @@ sequence_hash::sequence_hash(vector <container> input) {
     vector <container> copy = input;
     this->elements = copy;
     this->size = copy.size();
-    //C++ function for Hashmap Max Value on tail;
         vector <classType> keys;
     if (!input.empty()){    
         for(unordered_map<classType,dataType>::iterator it = elements.rbegin()->begin(); it != elements.rbegin()->end(); ++it) {
@@ -99,9 +100,6 @@ sequence_hash::sequence_hash(const sequence_hash& orig) {
 sequence_hash::~sequence_hash() {
 }
 
-//sequence sequence::proyection(int item);
-//sequence sequence::proyection(int item, sequence prefix);
-
 sequence_hash sequence_hash::append(classType var, dataType item){
     container element; 
     element.emplace(var, item);
@@ -120,10 +118,15 @@ sequence_hash sequence_hash::assemble(classType var, dataType item){
     return ritorno;
 }
 
+//Better way to handle empty set is required
 container sequence_hash::tail(){
-    container ritorno = (*(elements.rbegin()));
-    return ritorno;
-};
+	if (elements.rbegin()!=elements.rend()){
+		container ritorno = (*(elements.rbegin()));
+		return ritorno;
+	}
+	container empty;
+	return empty;
+}
 
 seq_pointer_hash sequence_hash::begin(){
     return seq_pointer_hash(const_cast<sequence_hash *> (this), elements.begin(), elements.end());
@@ -144,4 +147,62 @@ pairSet sequence_hash::itemList(){
         listing.insert(vStart->begin(), vStart->end());
         ++vStart;
     }return listing;
+}
+//______________________________________________________________________________________
+//______________________________________________________________________________________
+//______________________________________________________________________________________
+//_________________________________________PARAMETRISED_________________________________
+//______________________________________________________________________________________
+//______________________________________________________________________________________
+
+sequence_hash sequence_hash_parser::append(classType var, dataType item){
+    container element; 
+    element.emplace(var, item);
+	sequence_hash_parser ritorno = *this;
+	//PASS OVER CHILD ATTRIBUTES
+	ritorno.evaluator = evaluator;
+	ritorno.tokenSet = tokenSet;
+	ritorno.validity = validity;
+	//___________________________
+	(ritorno.elements).push_back(element);
+    ritorno.size = ritorno.size + 1;
+    ritorno.tailMax = var;
+	//VALIDITY OPERATIONS
+	if(!validity){
+		ritorno.tokenSet[convert(make_pair(var, item))]=true;
+		ritorno.tokenSet[convert(make_pair(var, 0))]=true;
+		ritorno.validity = ritorno.evaluator.eval(ritorno.tokenSet);
+	}
+	//___________________________
+    return ritorno;
+}
+
+sequence_hash sequence_hash_parser::assemble(classType var, dataType item){
+    sequence_hash_parser ritorno = *this;
+	//PASS OVER CHILD ATTRIBUTES
+	ritorno.evaluator = evaluator;
+	ritorno.tokenSet = tokenSet;
+	ritorno.validity = validity;
+	//___________________________
+    if (((ritorno.elements).rbegin())==((ritorno.elements).rend())){
+        return (ritorno.append(var, item));}
+    (*((ritorno.elements).rbegin())).emplace(var, item);
+    ritorno.tailMax = (ritorno.tailMax>var)?ritorno.tailMax:var;
+	//VALIDITY OPERATIONS
+	if(!validity){
+		ritorno.tokenSet[convert(make_pair(var, item))]=true;
+		ritorno.tokenSet[convert(make_pair(var, 0))]=true;
+		ritorno.validity = ritorno.evaluator.eval(ritorno.tokenSet);
+	}
+	//___________________________
+    return ritorno;
+}
+
+sequence_hash_parser::sequence_hash_parser(const sequence_hash_parser& orig) {
+    this->elements = orig.elements;
+    this->size = orig.size;
+    this->tailMax = orig.tailMax;
+	this->validity = orig.validity;
+	this->evaluator = orig.evaluator;
+	this->tokenSet = orig.tokenSet;
 }
