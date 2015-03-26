@@ -1,8 +1,7 @@
 /* 
- * File:   sequence_hash.hpp
  * Author: Agustin Guevara Cogorno
  * Supervisor: Hugo Alatrista Salas
- * Employer: Pontificia Universidad Católica del Perú (PUCP) - Artificial Intelligence and Pattern Recognition Research Group (GRPIIA)
+ * Employer: Pontificia Universidad Católica del Perú (PUCP) - Applied Artificial Intelligence and Pattern Recognition Research Group (GRPIAA)
  *
  */
 
@@ -11,6 +10,7 @@
 
 #include <unordered_map>
 #include <stack>
+#include <iostream>
 
 #ifndef dataType
     #define dataType int
@@ -29,6 +29,7 @@ class token{
 	friend class parserTree;
 	public:
 		virtual bool eval(unordered_map<hashConv, bool>)=0;
+		virtual void print()=0;
 	protected:
 		token *parent;
 		token *right;
@@ -39,6 +40,7 @@ class hashConvToken: public token{
 	friend class parserTree;
 	public:
 		bool eval(unordered_map<hashConv, bool> guide){return guide[content];};
+		void print(){cout<<(content>>16)<<':'<<((content<<16)>>16);}
 	private:
 		hashConvToken(){}
 		hashConvToken(hashConv item){content = item;}
@@ -49,6 +51,7 @@ class operatorToken: public token{
 	friend class parserTree;
 	public:
 		bool eval(unordered_map<hashConv, bool> guide);
+		void print(){cout<<'(';left->print();cout<<content;right->print();cout<<')';}
 	private:
 		operatorToken(){}
 		operatorToken(char item){content = item;}
@@ -61,6 +64,7 @@ class parserTree{
 		void operator <<(hashConv);
 		void operator <<(char);
 		bool eval(unordered_map<hashConv, bool>);
+		void print(){if(tokenStack.size())tokenStack.top()->print();cout<<'\n';}
 	private:
 		stack<token*> tokenStack;
 };
@@ -68,4 +72,3 @@ class parserTree{
 parserTree shuntingYard(string exp);
 
 #endif	/* HELPERFUNCTIONS_HPP */
-

@@ -1,8 +1,7 @@
 /* 
- * File:   sequence_hash.hpp
  * Author: Agustin Guevara Cogorno
  * Supervisor: Hugo Alatrista Salas
- * Employer: Pontificia Universidad Católica del Perú (PUCP) - Artificial Intelligence and Pattern Recognition Research Group (GRPIIA)
+ * Employer: Pontificia Universidad Católica del Perú (PUCP) - Applied Artificial Intelligence and Pattern Recognition Research Group (GRPIAA)
  *
  */
 
@@ -14,6 +13,7 @@ using namespace std;
 #include "sequence_hash.hpp"
 #include "seq_pointer_hash.hpp"
 #include "helperFunctions_hash.hpp"
+#include "parserTree.hpp"
 #include <iostream>
 #include <map>
 #include <unordered_map>
@@ -52,7 +52,7 @@ ostream &operator << (ostream &osin, unordered_map<string, int> hashmap){
 
 
 void demo();
-void parameterized(int, ifstream &, vector <sequence_hash> &, int, char**);
+void parameterized(int, ifstream &, vector <sequence_hash> &, parserTree, int, char**);
 void unparameterized(int, ifstream &, vector <sequence_hash> &);
 
 int main(int argc, char** argv) {
@@ -64,26 +64,27 @@ int main(int argc, char** argv) {
         file.open(argv[1]);
         if (!file){cout<<"Filed failed to open."; return 0;}
 	//FLAG CHECKING
+		parserTree tree;
         int threshold = atoi(argv[2]);
 		int counter;
 		cerr<<"Inputs Analyzed\n";
         string check = argv[2];
         vector <sequence_hash> seqDatabase;
 	//CHECKING INCLUSION
-		if (argc>3 && !strcmp(argv[4], "-include")){seqDatabase = massSequencer(file, argv[5], counter);}
+		if (argc>3 && !strcmp(argv[3], "-include")){seqDatabase = massSequencer(file, argv[4], counter, tree);}
         else{seqDatabase = massSequencer(file); counter = seqDatabase.size();}
 	//CHECKING IF % OR RAW NUMBER FOR THRESHOLD
         if (check.find('%') != (unsigned int)(-1)) 
 			threshold = (int)((((float)threshold)/100.00)*counter);
 		cerr<<"Starting Excecution of PrefixSpan\n";
         if (argc==3) unparameterized(threshold, file, seqDatabase);
-		if (argc>3) parameterized(threshold, file, seqDatabase, argc, argv);
+		if (argc>3) parameterized(threshold, file, seqDatabase, tree, argc, argv);
     }
     return 0;   
 }
 
 #include <climits>
-void parameterized(int threshold, ifstream &file, vector <sequence_hash> &seqDatabase, int argc, char** argv){
+void parameterized(int threshold, ifstream &file, vector <sequence_hash> &seqDatabase, parserTree tree, int argc, char** argv){
 	unordered_map<string, int> options;
 	//DEFAULT OPTIONS
 	options["-minSseq"]=0;
@@ -105,8 +106,9 @@ void parameterized(int threshold, ifstream &file, vector <sequence_hash> &seqDat
 			options["includeFlag"]=1;		
 		}
 	}cerr<<"Options Set:\n"<<options<<"-threshold: "<<threshold<<'\n';
+	cerr<<"TEMPORARY VALIDATION: "<<seqDatabase.size()<<'\n';
     auto start = std::chrono::steady_clock::now();
-	prefixSpanParameterized(threshold, seqDatabase, options);  
+	prefixSpanParameterized(threshold, seqDatabase, options, tree);  
     auto end = std::chrono::steady_clock::now();
     auto elapsed = std::chrono::duration_cast<std::chrono::microseconds>(end - start);
     manageTime(elapsed.count());
@@ -130,20 +132,20 @@ void demo(){
     string s4 = "5:5,7:7,(1:1,6:6),3:3,2:2,3:3";
     string hell = "(1:1,2:2,3:3,4:4,5:5)";
     vector <sequence_hash> seqDatabase;
-    sequence_hash p1; sequencer(p1, s1);
-    sequence_hash p2; sequencer(p2, s2);
-    sequence_hash p3; sequencer(p3, s3);
-    sequence_hash p4; sequencer(p4, s4);
-    sequence_hash TEST; sequencer(TEST, hell);
+    sequence_hash *p1 = new sequence_hash; sequencer(p1, s1);
+    sequence_hash *p2 = new sequence_hash; sequencer(p2, s2);
+    sequence_hash *p3 = new sequence_hash; sequencer(p3, s3);
+    sequence_hash *p4 = new sequence_hash; sequencer(p4, s4);
+    sequence_hash *TEST = new sequence_hash; sequencer(TEST, hell);
     cout<<p1<<'\n'<<p2<<'\n'<<p3<<'\n'<<p4<<'\n'<<TEST<<'\n';
-    cout<<p1.begin().proyect(6,6,TEST).null()<<'\n';
-    cout<<p2.begin().proyect(6,6,TEST).null()<<'\n';
-    cout<<p3.begin().proyect(6,6,TEST).null()<<'\n';
-    cout<<p4.begin().proyect(6,6,TEST).null()<<'\n';
-    seqDatabase.push_back(p1);
-    seqDatabase.push_back(p2);
-    seqDatabase.push_back(p3);
-    seqDatabase.push_back(p4);
+    cout<<p1->begin().proyect(6,6,*TEST).null()<<'\n';
+    cout<<p2->begin().proyect(6,6,*TEST).null()<<'\n';
+    cout<<p3->begin().proyect(6,6,*TEST).null()<<'\n';
+    cout<<p4->begin().proyect(6,6,*TEST).null()<<'\n';
+    seqDatabase.push_back(*p1);
+    seqDatabase.push_back(*p2);
+    seqDatabase.push_back(*p3);
+    seqDatabase.push_back(*p4);
     cout<<"Prefix Span Test:\n";
     prefixSpan(2, seqDatabase);
 }

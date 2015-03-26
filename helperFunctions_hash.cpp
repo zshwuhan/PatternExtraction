@@ -1,8 +1,7 @@
 /* 
- * File:   sequence_hash.hpp
  * Author: Agustin Guevara Cogorno
  * Supervisor: Hugo Alatrista Salas
- * Employer: Pontificia Universidad Católica del Perú (PUCP) - Artificial Intelligence and Pattern Recognition Research Group (GRPIIA)
+ * Employer: Pontificia Universidad Católica del Perú (PUCP) - Applied Artificial Intelligence and Pattern Recognition Research Group (GRPIAA)
  *
  */
 
@@ -52,18 +51,19 @@ pair<classType, dataType> deconvert(hashConv data){
     return make_pair((data>>16), (data<<16)>>16);
 }
 
-void sequencer(sequence_hash &output, string input){
+void sequencer(sequence_hash *trueOutput, string input, bool include){
     bool assembleMode = false;
     int low, high;
     stringstream inputStreamed(input);
+	sequence_hash *output = trueOutput;
     while(inputStreamed){
         if(inputStreamed.peek()=='('){
             inputStreamed.ignore();
             inputStreamed>>high;
             inputStreamed.ignore();
             inputStreamed>>low;
-                        output = output.append(high, low);
-                        assembleMode=true;
+			output = (output->append(high, low));
+			assembleMode=true;
         }else if(inputStreamed.peek()==')'){
             assembleMode=false;
             inputStreamed.ignore();
@@ -74,17 +74,19 @@ void sequencer(sequence_hash &output, string input){
                 inputStreamed>>high;
                 inputStreamed.ignore();
                 inputStreamed>>low;
-                                output = output.assemble(high,low);
-                            }else{
+				output = (output->assemble(high,low));
+			}else{
                 inputStreamed>>high;
                 inputStreamed.ignore();
                 inputStreamed>>low;
-                                output = output.append(high, low);
-                            }
+				output = (output->append(high, low));
+            }
         }else{
             inputStreamed.ignore();
         }
-    }
+    }//cerr<<"PREVIOUS TO EXIT: "<<output->valid()<<'\n';
+	if (include){*((sequence_hash_parser *)trueOutput) = *((sequence_hash_parser *)output);/*cerr<<"TING!";*/}
+	else{*trueOutput = *output;}
     return;
 }
 #include <fstream>
@@ -94,25 +96,28 @@ vector <sequence_hash> massSequencer(ifstream &input){
     while(input){
         string temp;
         getline(input, temp);
-        sequence_hash helper;
+        sequence_hash *helper = new sequence_hash;
         sequencer(helper, temp);
-        if (!helper.empty())output.push_back(helper);
+        if (!helper->empty())output.push_back(*helper);
     }
     return output;
 }
 
 //NEED FIX FOR PARENT/CHILD PROBLEM
-vector <sequence_hash> massSequencer(ifstream &input, char *cString, int &counter){
+vector <sequence_hash> massSequencer(ifstream &input, char *cString, int &counter, parserTree &tree){
     vector <sequence_hash> output;
 	string expression = cString;
 	parserTree jormungand = shuntingYard(expression);
+	tree.print();
+	counter = 0;
     while(input){
         string temp;
         getline(input, temp);
-		//vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv CLASS NEEDING DEFINITION
-        sequence_hash_parser helper(jormungand);
-        sequencer(helper, temp);
-        if (!helper.empty() && helper.valid())output.push_back(helper); ++counter;
+        sequence_hash_parser *helper= new sequence_hash_parser(jormungand);
+        sequencer(helper, temp, true);
+        if (!helper->empty() && helper->valid()){output.push_back(*(sequence_hash *)helper);}
+		++counter;
     }
+	tree = jormungand;
     return output;
 }

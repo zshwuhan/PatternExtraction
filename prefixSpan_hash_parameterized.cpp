@@ -1,8 +1,7 @@
 /* 
- * File:   sequence_hash.hpp
  * Author: Agustin Guevara Cogorno
  * Supervisor: Hugo Alatrista Salas
- * Employer: Pontificia Universidad Católica del Perú (PUCP) - Artificial Intelligence and Pattern Recognition Research Group (GRPIIA)
+ * Employer: Pontificia Universidad Católica del Perú (PUCP) - Applied Artificial Intelligence and Pattern Recognition Research Group (GRPIAA)
  *
  */
  
@@ -28,10 +27,10 @@
 
 using namespace std;
 
-void postprocess(sequence_hash prefix, unordered_map<string, int> options, int support){
-	if(prefix.valid()){
-		if(((size_t)options["-minSseq"]<=(prefix.tail().size())) && (options["-minSize"]<=prefix.getSize())){
-					cout<<"Support : "<<support<< " Sequence: " <<prefix<<'\n';
+void postprocess(sequence_hash *prefix, unordered_map<string, int> options, int support){
+	if(prefix->valid()){
+		if(((size_t)options["-minSseq"]<=(prefix->tail().size())) && (options["-minSize"]<=prefix->getSize())){
+					cout<<"Support : "<<support<< " Sequence: " <<*prefix<<'\n';
 				}
 	}
 }
@@ -71,8 +70,7 @@ void assembleProyectionParametrized(pairSet::iterator &candStart,  pairSet::iter
                             int threshold, sequence_hash &prefix, unordered_map <hashConv, vector<seq_pointer_hash> > &exit,
 							unordered_map <string, int> &options){
     vector<seq_pointer_hash>::iterator dataStart, dataEnd, reset; dataStart = database.begin(); dataEnd = database.end();
-    //Best spot for parallelism, do all of candidate threads and only thread 3 or 4 proyections at a time
-    //to not bother with things that fail threshold pretty fast
+//*>
     int limit = database.size() - threshold;
     while(candStart!=candEnd){
         vector <seq_pointer_hash> projectionResult;
@@ -93,45 +91,44 @@ void assembleProyectionParametrized(pairSet::iterator &candStart,  pairSet::iter
 
 //Checks that appendable field higher than the highest element already in tuple(or just jumps to uniqueCandidates lowest element higher than highest appending
 //and then does one check if lower than just move until check works)
-void __prefixSpan__Parameterized(pairSet &uniqueElements, int threshold, sequence_hash &prefix, vector <seq_pointer_hash> &database, unordered_map<string, int> &options){
+void __prefixSpan__Parameterized(pairSet &uniqueElements, int threshold, sequence_hash *prefix, vector <seq_pointer_hash> &database, unordered_map<string, int> &options){
 //PRINT IF CONDITIONS ARE MET
 	postprocess(prefix, options, database.size());
 //APPEND ONLY IF CURRENT ITEMSET ALREADY MEETS REQUIREMENTS
 //APPEND ONLY IF CURRENT CANDIDATE SEQUENCE IS SMALLER THAN REQUIRED SIZE
-	if ((size_t)options["-minSseq"] <= prefix.tail().size() && options["-maxSize"]>prefix.getSize()){
+	if ((size_t)options["-minSseq"] <= prefix->tail().size() && options["-maxSize"]>prefix->getSize()){
 		unordered_map <hashConv, vector<seq_pointer_hash> >::iterator start, end; 
 		pairSet newUnique;
 		unordered_map <hashConv, vector<seq_pointer_hash> > projDatabaseApp;
-		newUnique = appendProyectionParametrized(uniqueElements, database, threshold, prefix, projDatabaseApp, options);
+		newUnique = appendProyectionParametrized(uniqueElements, database, threshold, *((sequence_hash *)prefix), projDatabaseApp, options);
 		start = projDatabaseApp.begin(); end = projDatabaseApp.end();
 		while(start!=end){
-			sequence_hash appended = prefix;
-			appended = appended.append(deconvert(start->first));
+			sequence_hash *appended = prefix;
+			appended = (appended->append(deconvert(start->first)));
 			__prefixSpan__Parameterized(newUnique, threshold, appended, start->second, options);
 			++start;
 		}
 //ASSEMBLE ONLY IF CURRENT PREFIX IS SMALLER THAN REQUIRED SIZE
-	}if ((size_t)options["-maxSseq"] >= prefix.tail().size()){
+	}if ((size_t)options["-maxSseq"] >= prefix->tail().size()){
 		unordered_map <hashConv, vector<seq_pointer_hash> > projDatabaseAs;
-		classType temp = prefix.getTailMax();
+		classType temp = prefix->getTailMax();
 		pairSet::iterator assemblyStart = uniqueElements.begin();
 		while(assemblyStart != uniqueElements.end() && (assemblyStart->first <= temp)){++assemblyStart;}
-		assembleProyectionParametrized(assemblyStart, uniqueElements.end(), database, threshold, prefix, projDatabaseAs, options);
+		assembleProyectionParametrized(assemblyStart, uniqueElements.end(), database, threshold, *((sequence_hash *)prefix), projDatabaseAs, options);
 		unordered_map <hashConv, vector<seq_pointer_hash> >::iterator start, end;
 		start = projDatabaseAs.begin(); end = projDatabaseAs.end();
 		while(start!=end){
-			sequence_hash assembled = prefix;
-			assembled = assembled.assemble(deconvert(start->first));
+			sequence_hash *assembled = prefix;
+			assembled = (assembled->assemble(deconvert(start->first)));
 			__prefixSpan__Parameterized(uniqueElements, threshold, assembled, start->second, options);
 			++start;
 		}
 	}return;
 }
 
-void prefixSpanParameterized(int threshold, vector <sequence_hash> &database, unordered_map<string, int> &options){
+void prefixSpanParameterized(int threshold, vector <sequence_hash> &database, unordered_map<string, int> &options, parserTree &tree){
 //CONVERT SEQUENCES TO RESPECTIVE POINTERS
 //GENERATE CANDIDATE ELEMENTS SET
-//START RECURSIVE EVALUATIONS OF PREFIX SPAN
     vector <seq_pointer_hash> newDatabase;
     pairSet uniqueElements;
     unordered_map <hashConv, int> freq;
@@ -145,16 +142,25 @@ void prefixSpanParameterized(int threshold, vector <sequence_hash> &database, un
         ++start;
     }
     copyOver(freq, threshold, uniqueElements);
-    //Parallelisable to some degree
+//*>
     unordered_map <hashConv, vector<seq_pointer_hash>> projDatabaseApp;
     sequence_hash ePrefix;
     appendProyectionParametrized(uniqueElements, newDatabase, threshold, ePrefix, projDatabaseApp, options);   
     unordered_map <hashConv, vector<seq_pointer_hash> >::iterator starto, endo; starto = projDatabaseApp.begin(); endo = projDatabaseApp.end();
+//START RECURSIVE EVALUATIONS OF PREFIX SPAN
     while(starto!=endo){
-        sequence_hash appended;
-        appended = appended.append(deconvert(starto->first));
-        __prefixSpan__Parameterized(uniqueElements, threshold, appended, starto->second, options);
-        ++starto;
+//HACK TO WORK AROUND C++ PROBLEMS WITH POLYMORPHISM
+        if(options["includeFlag"]){
+			sequence_hash_parser *appended = new sequence_hash_parser(tree);
+			appended = (sequence_hash_parser *) appended->append(deconvert(starto->first));
+			__prefixSpan__Parameterized(uniqueElements, threshold, appended, starto->second, options);
+			++starto;
+		}else {
+			sequence_hash *appended = new sequence_hash;
+			*appended = *(appended->append(deconvert(starto->first)));
+			__prefixSpan__Parameterized(uniqueElements, threshold, appended, starto->second, options);
+			++starto;
+		}
     }
     return;
 }
