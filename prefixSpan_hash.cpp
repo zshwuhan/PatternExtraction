@@ -1,7 +1,8 @@
 /* 
+ * File:   sequence_hash.hpp
  * Author: Agustin Guevara Cogorno
  * Supervisor: Hugo Alatrista Salas
- * Employer: Pontificia Universidad Católica del Perú (PUCP) - Applied Artificial Intelligence and Pattern Recognition Research Group (GRPIIA)
+ * Employer: Pontificia Universidad Católica del Perú (PUCP) - Artificial Intelligence and Pattern Recognition Research Group (GRPIIA)
  *
  */
 
@@ -50,7 +51,7 @@ pairSet appendProyection( pairSet candidates,       vector <seq_pointer_hash> &d
             }
             ++dataStart;
         }if(complement<=limit){
-            sequence_hash printable = *(prefix.append(candStart->first, candStart->second));
+            sequence_hash printable = prefix.append(candStart->first, candStart->second);
             cout<<"Support : "<<database.size()-complement<< " Sequence: " <<printable<<'\n';
             exit.emplace(convert(*candStart), projectionResult);
             //Save projection result alongside the element it was meant for
@@ -84,7 +85,7 @@ void assembleProyection(pairSet::iterator &candStart,  pairSet::iterator candEnd
             }
             ++dataStart;
         }if(complement<=limit){
-            sequence_hash printable = *(prefix.assemble(candStart->first, candStart->second));
+            sequence_hash printable = prefix.assemble(candStart->first, candStart->second);
             cout<<"Support : "<<database.size()-complement<< " Sequence: " <<printable<<'\n';
             exit.emplace(convert(*candStart), projectionResult);
         }
@@ -130,14 +131,14 @@ void __prefixSpan__(pairSet &uniqueElements, int threshold, sequence_hash &prefi
     unordered_map <hashConv, vector<seq_pointer_hash> >::iterator start, end; start = projDatabaseApp.begin(); end = projDatabaseApp.end();
     while(start!=end){
         sequence_hash appended = prefix;
-        appended = *(appended.append(deconvert(start->first)));
+        appended = appended.append(deconvert(start->first));
         __prefixSpan__(newUnique, threshold, appended, start->second);
         ++start;
     }
     start = projDatabaseAs.begin(); end = projDatabaseAs.end();
     while(start!=end){
         sequence_hash assembled = prefix;
-        assembled = *(assembled.assemble(deconvert(start->first)));
+        assembled = assembled.assemble(deconvert(start->first));
         __prefixSpan__(uniqueElements, threshold, assembled, start->second);
         ++start;
     }return;
@@ -166,7 +167,7 @@ void prefixSpan(int threshold, vector <sequence_hash> &database){
     unordered_map <hashConv, vector<seq_pointer_hash> >::iterator starto, endo; starto = projDatabaseApp.begin(); endo = projDatabaseApp.end();
     while(starto!=endo){
         sequence_hash appended;
-        appended = *(appended.append(deconvert(starto->first)));
+        appended = appended.append(deconvert(starto->first));
         __prefixSpan__(uniqueElements, threshold, appended, starto->second);
         ++starto;
     }

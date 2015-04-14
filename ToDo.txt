@@ -1,1 +1,4 @@
+-There is a need to change all sequence_hash references and uses to a pointer to permit polymorphism to derived class
+-Change return to pointers and inside use calls to new
+-Alternatively make a copy of pretty much everything to implement an alternative version
 -Dire need for implementing tests; refactoring of major parts of the code will be required as cleanup in particular of the "parameterized" copies (fold overs)

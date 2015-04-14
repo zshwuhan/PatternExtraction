@@ -1,10 +1,10 @@
 /* 
-  * Author: Agustin Guevara Cogorno
- * Supervisor: Hugo Alatrista Salas
- * Employer: Pontificia Universidad Católica del Perú (PUCP) - Applied Artificial Intelligence and Pattern Recognition Research Group (GRPIAA)
- *
+ * File:   seq_pointer.cpp
+ * Author: Agustin
+ * 
+ * Created on 22 February 2015, 14:05
  */
-
+//UNFINISHED
 #include <iostream>
 #include "seq_pointer_hash.hpp"
 #include <algorithm>
@@ -81,9 +81,11 @@ int match(container &subseq, container &seq){
 }
 
 
+//CLEAR UNCLEAN PATCHING
 seq_pointer_hash seq_pointer_hash::proyect(classType varClass, dataType varData, sequence_hash &prefix){
     seq_pointer_hash result = (*this);
     vector<container>::iterator ritorno;
+    //simple case if we already have wildcarded
     if (result.getWildcard()){
         if( result.current->count(varClass) && ( (*(result.current))[varClass] == varData )  ){
             result.wildcard = true;
@@ -91,7 +93,7 @@ seq_pointer_hash seq_pointer_hash::proyect(classType varClass, dataType varData,
         }
         result.skip();
     }
-        sequence_hash nPrefix = *(prefix.assemble(varClass, varData));
+        sequence_hash nPrefix = prefix.assemble(varClass, varData);
         container search =  nPrefix.tail();
         while(!result.null()){
             if (  match( search,(*(result.current)) )  ){result.wildcard = true; break;}

@@ -1,7 +1,8 @@
 /* 
+ * File:   sequence_hash.hpp
  * Author: Agustin Guevara Cogorno
  * Supervisor: Hugo Alatrista Salas
- * Employer: Pontificia Universidad Católica del Perú (PUCP) - Applied Artificial Intelligence and Pattern Recognition Research Group (GRPIAA)
+ * Employer: Pontificia Universidad Católica del Perú (PUCP) - Artificial Intelligence and Pattern Recognition Research Group (GRPIIA)
  *
  */
 
@@ -26,8 +27,8 @@ void manageTime(int);
 void vectorPrint(vector <sequence_hash>);
 hashConv convert(pair<classType, dataType>);
 pair<classType, dataType> deconvert(hashConv);
-void sequencer(sequence_hash *, string, bool = false);
-vector <sequence_hash> massSequencer(ifstream &, char *, int &, parserTree &);
+void sequencer(sequence_hash &, string);
+vector <sequence_hash> massSequencer(ifstream &, char *, int &);
 vector <sequence_hash> massSequencer(ifstream &);
 
 

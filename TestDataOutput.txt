@@ -1,0 +1,242 @@
+Support : 641 Sequence: 1:1
+Support : 672 Sequence: 1:2
+Support : 622 Sequence: 1:3
+Support : 777 Sequence: 2:1
+Support : 534 Sequence: 3:1
+Support : 556 Sequence: 3:2
+Support : 433 Sequence: 3:3
+Support : 434 Sequence: 3:2, 1:2
+Support : 489 Sequence: 3:2, 2:1
+Support : 439 Sequence: 3:2, 2:1, 2:1
+Support : 474 Sequence: 3:1, 2:1
+Support : 526 Sequence: 2:1, 1:1
+Support : 583 Sequence: 2:1, 1:2
+Support : 528 Sequence: 2:1, 1:3
+Support : 668 Sequence: 2:1, 2:1
+Support : 479 Sequence: 2:1, 3:1
+Support : 468 Sequence: 2:1, 3:2
+Support : 534 Sequence: (3:1,2:1)
+Support : 556 Sequence: (3:2,2:1)
+Support : 433 Sequence: (3:3,2:1)
+Support : 454 Sequence: 2:1, 2:1, 1:1
+Support : 518 Sequence: 2:1, 2:1, 1:2
+Support : 482 Sequence: 2:1, 2:1, 1:3
+Support : 590 Sequence: 2:1, 2:1, 2:1
+Support : 479 Sequence: 2:1, (3:1,2:1)
+Support : 468 Sequence: 2:1, (3:2,2:1)
+Support : 458 Sequence: 2:1, 2:1, 2:1, 1:2
+Support : 435 Sequence: 2:1, 2:1, 2:1, 1:3
+Support : 530 Sequence: 2:1, 2:1, 2:1, 2:1
+Support : 476 Sequence: 2:1, 2:1, 2:1, 2:1, 2:1
+Support : 433 Sequence: 2:1, 2:1, 1:2, 1:2
+Support : 463 Sequence: 2:1, 2:1, 1:2, 2:1
+Support : 484 Sequence: 2:1, 2:1, (2:1,1:2)
+Support : 434 Sequence: 2:1, 2:1, (2:1,1:2), 2:1
+Support : 457 Sequence: 2:1, 1:3, 2:1
+Support : 474 Sequence: 2:1, 1:2, 1:2
+Support : 518 Sequence: 2:1, 1:2, 2:1
+Support : 541 Sequence: 2:1, (2:1,1:2)
+Support : 450 Sequence: 2:1, 1:2, 2:1, 2:1
+Support : 434 Sequence: 2:1, 1:2, (2:1,1:2)
+Support : 444 Sequence: 2:1, (2:1,1:2), 1:2
+Support : 486 Sequence: 2:1, (2:1,1:2), 2:1
+Support : 458 Sequence: 2:1, 1:1, 2:1
+Support : 450 Sequence: 2:1, (2:1,1:1)
+Support : 434 Sequence: (3:2,2:1), 1:2
+Support : 489 Sequence: (3:2,2:1), 2:1
+Support : 439 Sequence: (3:2,2:1), 2:1, 2:1
+Support : 474 Sequence: (3:1,2:1), 2:1
+Support : 448 Sequence: 1:3, 1:2
+Support : 479 Sequence: 1:3, 1:3
+Support : 498 Sequence: 1:3, 2:1
+Support : 460 Sequence: (2:1,1:3)
+Support : 435 Sequence: 1:3, 2:1, 2:1
+Support : 450 Sequence: 1:2, 1:1
+Support : 526 Sequence: 1:2, 1:2
+Support : 467 Sequence: 1:2, 1:3
+Support : 573 Sequence: 1:2, 2:1
+Support : 622 Sequence: (2:1,1:2)
+Support : 459 Sequence: 1:2, 2:1, 1:2
+Support : 510 Sequence: 1:2, 2:1, 2:1
+Support : 450 Sequence: 1:2, 2:1, 2:1, 2:1
+Support : 437 Sequence: 1:2, 1:2, 1:2
+Support : 457 Sequence: 1:2, 1:2, 2:1
+Support : 478 Sequence: 1:2, (2:1,1:2)
+Support : 492 Sequence: (2:1,1:2), 1:2
+Support : 431 Sequence: (2:1,1:2), 1:3
+Support : 539 Sequence: (2:1,1:2), 2:1
+Support : 431 Sequence: (2:1,1:2), 2:1, 1:2
+Support : 481 Sequence: (2:1,1:2), 2:1, 2:1
+Support : 435 Sequence: (2:1,1:2), 2:1, 2:1, 2:1
+Support : 431 Sequence: (2:1,1:2), 1:2, 2:1
+Support : 459 Sequence: (2:1,1:2), (2:1,1:2)
+Support : 488 Sequence: 1:1, 1:1
+Support : 473 Sequence: 1:1, 1:2
+Support : 439 Sequence: 1:1, 1:3
+Support : 542 Sequence: 1:1, 2:1
+Support : 532 Sequence: (2:1,1:1)
+Support : 478 Sequence: 1:1, 2:1, 2:1
+Support : 434 Sequence: 1:1, 2:1, 2:1, 2:1
+Support : 480 Sequence: (2:1,1:1), 2:1
+Support : 641 Sequence: 1:1
+Support : 672 Sequence: 1:2
+Support : 622 Sequence: 1:3
+Support : 777 Sequence: 2:1
+Support : 534 Sequence: 3:1
+Support : 556 Sequence: 3:2
+Support : 433 Sequence: 3:3
+Support : 434 Sequence: 3:2, 1:2
+Support : 489 Sequence: 3:2, 2:1
+Support : 439 Sequence: 3:2, 2:1, 2:1
+Support : 474 Sequence: 3:1, 2:1
+Support : 526 Sequence: 2:1, 1:1
+Support : 583 Sequence: 2:1, 1:2
+Support : 528 Sequence: 2:1, 1:3
+Support : 668 Sequence: 2:1, 2:1
+Support : 479 Sequence: 2:1, 3:1
+Support : 468 Sequence: 2:1, 3:2
+Support : 534 Sequence: (3:1,2:1)
+Support : 556 Sequence: (3:2,2:1)
+Support : 433 Sequence: (3:3,2:1)
+Support : 454 Sequence: 2:1, 2:1, 1:1
+Support : 518 Sequence: 2:1, 2:1, 1:2
+Support : 482 Sequence: 2:1, 2:1, 1:3
+Support : 590 Sequence: 2:1, 2:1, 2:1
+Support : 479 Sequence: 2:1, (3:1,2:1)
+Support : 468 Sequence: 2:1, (3:2,2:1)
+Support : 458 Sequence: 2:1, 2:1, 2:1, 1:2
+Support : 435 Sequence: 2:1, 2:1, 2:1, 1:3
+Support : 530 Sequence: 2:1, 2:1, 2:1, 2:1
+Support : 476 Sequence: 2:1, 2:1, 2:1, 2:1, 2:1
+Support : 433 Sequence: 2:1, 2:1, 1:2, 1:2
+Support : 463 Sequence: 2:1, 2:1, 1:2, 2:1
+Support : 484 Sequence: 2:1, 2:1, (2:1,1:2)
+Support : 434 Sequence: 2:1, 2:1, (2:1,1:2), 2:1
+Support : 457 Sequence: 2:1, 1:3, 2:1
+Support : 474 Sequence: 2:1, 1:2, 1:2
+Support : 518 Sequence: 2:1, 1:2, 2:1
+Support : 541 Sequence: 2:1, (2:1,1:2)
+Support : 450 Sequence: 2:1, 1:2, 2:1, 2:1
+Support : 434 Sequence: 2:1, 1:2, (2:1,1:2)
+Support : 444 Sequence: 2:1, (2:1,1:2), 1:2
+Support : 486 Sequence: 2:1, (2:1,1:2), 2:1
+Support : 458 Sequence: 2:1, 1:1, 2:1
+Support : 450 Sequence: 2:1, (2:1,1:1)
+Support : 434 Sequence: (3:2,2:1), 1:2
+Support : 489 Sequence: (3:2,2:1), 2:1
+Support : 439 Sequence: (3:2,2:1), 2:1, 2:1
+Support : 474 Sequence: (3:1,2:1), 2:1
+Support : 448 Sequence: 1:3, 1:2
+Support : 479 Sequence: 1:3, 1:3
+Support : 498 Sequence: 1:3, 2:1
+Support : 460 Sequence: (2:1,1:3)
+Support : 435 Sequence: 1:3, 2:1, 2:1
+Support : 450 Sequence: 1:2, 1:1
+Support : 526 Sequence: 1:2, 1:2
+Support : 467 Sequence: 1:2, 1:3
+Support : 573 Sequence: 1:2, 2:1
+Support : 622 Sequence: (2:1,1:2)
+Support : 459 Sequence: 1:2, 2:1, 1:2
+Support : 510 Sequence: 1:2, 2:1, 2:1
+Support : 450 Sequence: 1:2, 2:1, 2:1, 2:1
+Support : 437 Sequence: 1:2, 1:2, 1:2
+Support : 457 Sequence: 1:2, 1:2, 2:1
+Support : 478 Sequence: 1:2, (2:1,1:2)
+Support : 492 Sequence: (2:1,1:2), 1:2
+Support : 431 Sequence: (2:1,1:2), 1:3
+Support : 539 Sequence: (2:1,1:2), 2:1
+Support : 431 Sequence: (2:1,1:2), 2:1, 1:2
+Support : 481 Sequence: (2:1,1:2), 2:1, 2:1
+Support : 435 Sequence: (2:1,1:2), 2:1, 2:1, 2:1
+Support : 431 Sequence: (2:1,1:2), 1:2, 2:1
+Support : 459 Sequence: (2:1,1:2), (2:1,1:2)
+Support : 488 Sequence: 1:1, 1:1
+Support : 473 Sequence: 1:1, 1:2
+Support : 439 Sequence: 1:1, 1:3
+Support : 542 Sequence: 1:1, 2:1
+Support : 532 Sequence: (2:1,1:1)
+Support : 478 Sequence: 1:1, 2:1, 2:1
+Support : 434 Sequence: 1:1, 2:1, 2:1, 2:1
+Support : 480 Sequence: (2:1,1:1), 2:1
+Excecution Time: 189011ms
+Support : 641 Sequence: 1:1
+Support : 672 Sequence: 1:2
+Support : 622 Sequence: 1:3
+Support : 777 Sequence: 2:1
+Support : 534 Sequence: 3:1
+Support : 556 Sequence: 3:2
+Support : 433 Sequence: 3:3
+Support : 434 Sequence: 3:2, 1:2
+Support : 489 Sequence: 3:2, 2:1
+Support : 439 Sequence: 3:2, 2:1, 2:1
+Support : 474 Sequence: 3:1, 2:1
+Support : 526 Sequence: 2:1, 1:1
+Support : 583 Sequence: 2:1, 1:2
+Support : 528 Sequence: 2:1, 1:3
+Support : 668 Sequence: 2:1, 2:1
+Support : 479 Sequence: 2:1, 3:1
+Support : 468 Sequence: 2:1, 3:2
+Support : 534 Sequence: (3:1,2:1)
+Support : 556 Sequence: (3:2,2:1)
+Support : 433 Sequence: (3:3,2:1)
+Support : 454 Sequence: 2:1, 2:1, 1:1
+Support : 518 Sequence: 2:1, 2:1, 1:2
+Support : 482 Sequence: 2:1, 2:1, 1:3
+Support : 590 Sequence: 2:1, 2:1, 2:1
+Support : 479 Sequence: 2:1, (3:1,2:1)
+Support : 468 Sequence: 2:1, (3:2,2:1)
+Support : 458 Sequence: 2:1, 2:1, 2:1, 1:2
+Support : 435 Sequence: 2:1, 2:1, 2:1, 1:3
+Support : 530 Sequence: 2:1, 2:1, 2:1, 2:1
+Support : 476 Sequence: 2:1, 2:1, 2:1, 2:1, 2:1
+Support : 433 Sequence: 2:1, 2:1, 1:2, 1:2
+Support : 463 Sequence: 2:1, 2:1, 1:2, 2:1
+Support : 484 Sequence: 2:1, 2:1, (2:1,1:2)
+Support : 434 Sequence: 2:1, 2:1, (2:1,1:2), 2:1
+Support : 457 Sequence: 2:1, 1:3, 2:1
+Support : 474 Sequence: 2:1, 1:2, 1:2
+Support : 518 Sequence: 2:1, 1:2, 2:1
+Support : 541 Sequence: 2:1, (2:1,1:2)
+Support : 450 Sequence: 2:1, 1:2, 2:1, 2:1
+Support : 434 Sequence: 2:1, 1:2, (2:1,1:2)
+Support : 444 Sequence: 2:1, (2:1,1:2), 1:2
+Support : 486 Sequence: 2:1, (2:1,1:2), 2:1
+Support : 458 Sequence: 2:1, 1:1, 2:1
+Support : 450 Sequence: 2:1, (2:1,1:1)
+Support : 434 Sequence: (3:2,2:1), 1:2
+Support : 489 Sequence: (3:2,2:1), 2:1
+Support : 439 Sequence: (3:2,2:1), 2:1, 2:1
+Support : 474 Sequence: (3:1,2:1), 2:1
+Support : 448 Sequence: 1:3, 1:2
+Support : 479 Sequence: 1:3, 1:3
+Support : 498 Sequence: 1:3, 2:1
+Support : 460 Sequence: (2:1,1:3)
+Support : 435 Sequence: 1:3, 2:1, 2:1
+Support : 450 Sequence: 1:2, 1:1
+Support : 526 Sequence: 1:2, 1:2
+Support : 467 Sequence: 1:2, 1:3
+Support : 573 Sequence: 1:2, 2:1
+Support : 622 Sequence: (2:1,1:2)
+Support : 459 Sequence: 1:2, 2:1, 1:2
+Support : 510 Sequence: 1:2, 2:1, 2:1
+Support : 450 Sequence: 1:2, 2:1, 2:1, 2:1
+Support : 437 Sequence: 1:2, 1:2, 1:2
+Support : 457 Sequence: 1:2, 1:2, 2:1
+Support : 478 Sequence: 1:2, (2:1,1:2)
+Support : 492 Sequence: (2:1,1:2), 1:2
+Support : 431 Sequence: (2:1,1:2), 1:3
+Support : 539 Sequence: (2:1,1:2), 2:1
+Support : 431 Sequence: (2:1,1:2), 2:1, 1:2
+Support : 481 Sequence: (2:1,1:2), 2:1, 2:1
+Support : 435 Sequence: (2:1,1:2), 2:1, 2:1, 2:1
+Support : 431 Sequence: (2:1,1:2), 1:2, 2:1
+Support : 459 Sequence: (2:1,1:2), (2:1,1:2)
+Support : 488 Sequence: 1:1, 1:1
+Support : 473 Sequence: 1:1, 1:2
+Support : 439 Sequence: 1:1, 1:3
+Support : 542 Sequence: 1:1, 2:1
+Support : 532 Sequence: (2:1,1:1)
+Support : 478 Sequence: 1:1, 2:1, 2:1
+Support : 434 Sequence: 1:1, 2:1, 2:1, 2:1
+Support : 480 Sequence: (2:1,1:1), 2:1
+Excecution Time: 265015ms

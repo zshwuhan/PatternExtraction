@@ -1,8 +1,10 @@
 /* 
+ * File:   sequence_hash.hpp
  * Author: Agustin Guevara Cogorno
  * Supervisor: Hugo Alatrista Salas
- * Employer: Pontificia Universidad Católica del Perú (PUCP) - Applied Artificial Intelligence and Pattern Recognition Research Group (GRPIAA)
+ * Employer: Pontificia Universidad Católica del Perú (PUCP) - Artificial Intelligence and Pattern Recognition Research Group (GRPIIA)
  *
+ * Created on 12 February 2015, 00:00
  */
 
 #ifndef SEQUENCE_HASH_HPP
@@ -38,10 +40,10 @@ public:
     virtual ~sequence_hash();
 //    sequence proyection(int item);
 //    sequence proyection(int item, sequence prefix);
-    virtual sequence_hash *append(classType var, dataType item);
-    virtual sequence_hash *append(pair<classType, dataType> pare){return this->append(pare.first, pare.second);}
-    virtual sequence_hash *assemble(classType var, dataType item);
-    virtual sequence_hash *assemble(pair<classType, dataType> pare){return this->assemble(pare.first, pare.second);}
+    virtual sequence_hash append(classType var, dataType item);
+    virtual sequence_hash append(pair<classType, dataType> pare){return this->append(pare.first, pare.second);}
+    virtual sequence_hash assemble(classType var, dataType item);
+    virtual sequence_hash assemble(pair<classType, dataType> pare){return this->assemble(pare.first, pare.second);}
     container tail();
     int in(int);
     int getSize(){return size;}
@@ -60,15 +62,14 @@ protected:
 
 class sequence_hash_parser: public sequence_hash{
 public:
-	sequence_hash_parser(){validity = false;}
-	sequence_hash_parser(parserTree parser){evaluator = parser; validity = false;}
+	sequence_hash_parser(parserTree parser){evaluator = parser;}
 	//MISSING IMPLEMENTATION
     sequence_hash_parser(const sequence_hash_parser& orig);
 	//MISSING IMPLEMENTATION
-    sequence_hash *append(classType var, dataType item);
-    sequence_hash *append(pair<classType, dataType> pare){return this->append(pare.first, pare.second);}
-    sequence_hash *assemble(classType var, dataType item);
-    sequence_hash *assemble(pair<classType, dataType> pare){return this->assemble(pare.first, pare.second);}
+    sequence_hash append(classType var, dataType item);
+    sequence_hash append(pair<classType, dataType> pare){return this->append(pare.first, pare.second);}
+    sequence_hash assemble(classType var, dataType item);
+    sequence_hash assemble(pair<classType, dataType> pare){return this->assemble(pare.first, pare.second);}
 	bool valid(){return validity;}
 protected:
 	bool validity;

@@ -1,10 +1,10 @@
 /* 
-  * Author: Agustin Guevara Cogorno
- * Supervisor: Hugo Alatrista Salas
- * Employer: Pontificia Universidad Católica del Perú (PUCP) - Applied Artificial Intelligence and Pattern Recognition Research Group (GRPIAA)
+ * File:   seq_pointer.hpp
+ * Author: Agustin
  *
+ * Created on 22 February 2015, 14:05
  */
- 
+//UNFINISHED
 #ifndef SEQ_POINTER_HASH_HPP
 #define	SEQ_POINTER_HASH_HPP
 

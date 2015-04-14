@@ -1,7 +1,8 @@
 /* 
+ * File:   sequence_hash.hpp
  * Author: Agustin Guevara Cogorno
  * Supervisor: Hugo Alatrista Salas
- * Employer: Pontificia Universidad Católica del Perú (PUCP) - Applied Artificial Intelligence and Pattern Recognition Research Group (GRPIIA)
+ * Employer: Pontificia Universidad Católica del Perú (PUCP) - Artificial Intelligence and Pattern Recognition Research Group (GRPIIA)
  *
  */
 
