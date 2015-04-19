@@ -50,7 +50,7 @@ parserTree shuntingYard(string exp){
 }
 
 bool operatorToken::eval(unordered_map<hashConv, bool> guide){
-	if (content=='&' || content=='^')return right->eval(guide) && left->eval(guide);
+	if (content=='&' || content=='^' || content=='n')return right->eval(guide) && left->eval(guide);
 	if (content=='|' || content=='v')return right->eval(guide) || left->eval(guide);
 	return 0;
 	}

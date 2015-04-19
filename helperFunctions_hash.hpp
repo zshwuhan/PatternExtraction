@@ -28,7 +28,7 @@ void vectorPrint(vector <sequence_hash>);
 hashConv convert(pair<classType, dataType>);
 pair<classType, dataType> deconvert(hashConv);
 void sequencer(sequence_hash &, string);
-vector <sequence_hash> massSequencer(ifstream &, char *, int &);
+vector <sequence_hash> massSequencer(ifstream &, parserTree *, int &);
 vector <sequence_hash> massSequencer(ifstream &);
 
 

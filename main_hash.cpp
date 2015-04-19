@@ -52,7 +52,7 @@ ostream &operator << (ostream &osin, unordered_map<string, int> hashmap){
 
 
 void demo();
-void parameterized(int, ifstream &, vector <sequence_hash> &, int, char**);
+void parameterized(int, ifstream &, vector <sequence_hash> &, parserTree *, int, char**);
 void unparameterized(int, ifstream &, vector <sequence_hash> &);
 
 int main(int argc, char** argv) {
@@ -65,25 +65,31 @@ int main(int argc, char** argv) {
         if (!file){cout<<"Filed failed to open."; return 0;}
 	//FLAG CHECKING
         int threshold = atoi(argv[2]);
-		int counter;
+		int counter=0;
 		cerr<<"Inputs Analyzed\n";
         string check = argv[2];
         vector <sequence_hash> seqDatabase;
+		parserTree *jormungand = NULL;
 	//CHECKING INCLUSION
-		if (argc>3 && !strcmp(argv[4], "-include")){seqDatabase = massSequencer(file, argv[5], counter);}
+		if (argc>3 && !strcmp(argv[3], "-include")){	
+			string expression = argv[4];
+			jormungand = new parserTree;
+			*jormungand = shuntingYard(expression); 
+			seqDatabase = massSequencer(file, jormungand, counter);
+		}
         else{seqDatabase = massSequencer(file); counter = seqDatabase.size();}
 	//CHECKING IF % OR RAW NUMBER FOR THRESHOLD
-        if (check.find('%') != (unsigned int)(-1)) 
-			threshold = (int)((((float)threshold)/100.00)*counter);
+        if (check.find('%') != string::npos){
+			threshold = (int)((((float)threshold)/100.00)*counter);}
 		cerr<<"Starting Excecution of PrefixSpan\n";
         if (argc==3) unparameterized(threshold, file, seqDatabase);
-		if (argc>3) parameterized(threshold, file, seqDatabase, argc, argv);
+		if (argc>3) parameterized(threshold, file, seqDatabase, jormungand, argc, argv);
     }
     return 0;   
 }
 
 #include <climits>
-void parameterized(int threshold, ifstream &file, vector <sequence_hash> &seqDatabase, int argc, char** argv){
+void parameterized(int threshold, ifstream &file, vector <sequence_hash> &seqDatabase, parserTree *tree, int argc, char** argv){
 	unordered_map<string, int> options;
 	//DEFAULT OPTIONS
 	options["-minSseq"]=0;
@@ -91,7 +97,7 @@ void parameterized(int threshold, ifstream &file, vector <sequence_hash> &seqDat
 	options["-minSize"]=0;
 	options["-maxSize"]=MAX_INT;
 	string inclusion = "-include";
-	options["includeFlag"] = 0;
+	options["-includeFlag"] = 0;
 	//OPTION PARSING
 	for(int i = 3; i<argc ;++i){
 		string option = argv[i];
@@ -102,11 +108,11 @@ void parameterized(int threshold, ifstream &file, vector <sequence_hash> &seqDat
 		}
 		else {//REMINDER: PREPROCESSING IS DONE THROUGH OVERLOAD, POSTPROCESSING IS DONE THROUGH THE VALID ATTRIBUTE IN SEQUENCE_HASH
 			string expression = argv[i];
-			options["includeFlag"]=1;		
+			options["-includeFlag"]=1;		
 		}
 	}cerr<<"Options Set:\n"<<options<<"-threshold: "<<threshold<<'\n';
     auto start = std::chrono::steady_clock::now();
-	prefixSpanParameterized(threshold, seqDatabase, options);  
+	prefixSpanParameterized(threshold, seqDatabase, options, tree);  
     auto end = std::chrono::steady_clock::now();
     auto elapsed = std::chrono::duration_cast<std::chrono::microseconds>(end - start);
     manageTime(elapsed.count());

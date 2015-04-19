@@ -62,8 +62,8 @@ void sequencer(sequence_hash &output, string input){
             inputStreamed>>high;
             inputStreamed.ignore();
             inputStreamed>>low;
-                        output = output.append(high, low);
-                        assembleMode=true;
+                output = output.append(high, low);
+                assembleMode=true;
         }else if(inputStreamed.peek()==')'){
             assembleMode=false;
             inputStreamed.ignore();
@@ -74,12 +74,12 @@ void sequencer(sequence_hash &output, string input){
                 inputStreamed>>high;
                 inputStreamed.ignore();
                 inputStreamed>>low;
-                                output = output.assemble(high,low);
+					output = output.assemble(high,low);
                             }else{
                 inputStreamed>>high;
                 inputStreamed.ignore();
                 inputStreamed>>low;
-                                output = output.append(high, low);
+					output = output.append(high, low);
                             }
         }else{
             inputStreamed.ignore();
@@ -102,17 +102,17 @@ vector <sequence_hash> massSequencer(ifstream &input){
 }
 
 //NEED FIX FOR PARENT/CHILD PROBLEM
-vector <sequence_hash> massSequencer(ifstream &input, char *cString, int &counter){
+vector <sequence_hash> massSequencer(ifstream &input, parserTree *jormungand, int &counter){
     vector <sequence_hash> output;
-	string expression = cString;
-	parserTree jormungand = shuntingYard(expression);
     while(input){
         string temp;
         getline(input, temp);
-		//vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv CLASS NEEDING DEFINITION
-        sequence_hash_parser helper(jormungand);
+        sequence_hash helper(jormungand);
         sequencer(helper, temp);
-        if (!helper.empty() && helper.valid())output.push_back(helper); ++counter;
+        if (!helper.empty()){
+			++counter;
+			if(helper.valid())output.push_back(helper); 
+		}
     }
     return output;
 }

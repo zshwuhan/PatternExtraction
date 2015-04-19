@@ -128,10 +128,9 @@ void __prefixSpan__Parameterized(pairSet &uniqueElements, int threshold, sequenc
 	}return;
 }
 
-void prefixSpanParameterized(int threshold, vector <sequence_hash> &database, unordered_map<string, int> &options){
+void prefixSpanParameterized(int threshold, vector <sequence_hash> &database, unordered_map<string, int> &options, parserTree *tree){
 //CONVERT SEQUENCES TO RESPECTIVE POINTERS
 //GENERATE CANDIDATE ELEMENTS SET
-//START RECURSIVE EVALUATIONS OF PREFIX SPAN
     vector <seq_pointer_hash> newDatabase;
     pairSet uniqueElements;
     unordered_map <hashConv, int> freq;
@@ -145,16 +144,17 @@ void prefixSpanParameterized(int threshold, vector <sequence_hash> &database, un
         ++start;
     }
     copyOver(freq, threshold, uniqueElements);
-    //Parallelisable to some degree
+//*>
     unordered_map <hashConv, vector<seq_pointer_hash>> projDatabaseApp;
     sequence_hash ePrefix;
     appendProyectionParametrized(uniqueElements, newDatabase, threshold, ePrefix, projDatabaseApp, options);   
     unordered_map <hashConv, vector<seq_pointer_hash> >::iterator starto, endo; starto = projDatabaseApp.begin(); endo = projDatabaseApp.end();
+//START RECURSIVE EVALUATIONS OF PREFIX SPAN
     while(starto!=endo){
-        sequence_hash appended;
-        appended = appended.append(deconvert(starto->first));
-        __prefixSpan__Parameterized(uniqueElements, threshold, appended, starto->second, options);
-        ++starto;
+		sequence_hash appended (tree);
+		appended = appended.append(deconvert(starto->first));
+		__prefixSpan__Parameterized(uniqueElements, threshold, appended, starto->second, options);
+		++starto;
     }
     return;
 }
