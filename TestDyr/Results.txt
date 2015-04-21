@@ -1,0 +1,45 @@
+-minSseq 2: timeout
+-minSseq 3: timeout
+-minSseq 4: 563, Excecution Time: 5.127s
+-minSseq 5: 0, Excecution Time: 98.5ms
+-minSseq 6: 0, Excecution Time: 80.1ms
+-minSseq 7: 0, Excecution Time: 71.2ms
+-maxSize 2: 109288, Excecution Time: 21.849s
+-maxSize 3: timeout
+-maxSize 4: timeout
+-maxSize 5: timeout
+-maxSize 6: timeout
+-maxSize 7: timeout
+-maxSseq 2: timeout
+-maxSseq 3: timeout
+-maxSseq 4: timeout
+-maxSseq 5: timeout
+-maxSseq 6: timeout
+-maxSseq 7: timeout
+-minSize 2: timeout
+-minSize 3: timeout
+-minSize 4: timeout
+-minSize 5: timeout
+-minSize 6: timeout
+-minSize 7: timeout
+inclusion (28:5)+ -minSseq 2: timeout
+inclusion (28:5)+ -minSseq 3: timeout
+inclusion (28:5)+ -minSseq 4: 257, Excecution Time: 6.583s
+inclusion (28:5)+ -maxSize 2: 24502, Excecution Time: 23.556s
+inclusion (28:5)+ -maxSize 3: timeout
+inclusion (28:5)+ -maxSize 4: timeout
+inclusion (28:5)+ -minSize 2: timeout
+inclusion (28:5)+ -minSize 3: timeout
+inclusion (28:5)+ -minSize 4: timeout
+inclusion (28:5)+ -maxSseq 2: timeout
+inclusion (28:5)+ -maxSseq 3: timeout
+inclusion (28:5)+ -maxSseq 4: timeout
+inclusion (28:5)+ -minSseq 4 + -maxSize 2: 47, Excecution Time: 811.202ms
+inclusion (28:5)+ -minSseq 4 + -maxSize 3: 157, Excecution Time: 2.652s
+inclusion (28:5)+ -minSseq 4 + -maxSize 4: 237, Excecution Time: 4.851s
+inclusion (28:5)+ -minSseq 4 + -maxSseq 2: 0, Excecution Time: 62.400ms
+inclusion (28:5)+ -minSseq 4 + -maxSseq 3: 257, Excecution Time: 5.943s
+inclusion (28:5)+ -minSseq 4 + -maxSseq 4: 257, Excecution Time: 5.413s
+inclusion (28:5)+ -minSseq 4 + -minSize 2: 254, Excecution Time: 5.943s
+inclusion (28:5)+ -minSseq 4 + -minSize 3: 210, Excecution Time: 5.974s
+inclusion (28:5)+ -minSseq 4 + -minSize 4: 100, Excecution Time: 4.836s
